@@ -1,0 +1,61 @@
+/* Small layout helpers. They use tokens only. */
+.stack {
+  display: grid;
+  gap: var(--space-4);
+}
+.stack-sm {
+  display: grid;
+  gap: var(--space-2);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+.row-between {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.list-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+}
+.choice {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+.choice:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--color-success-bg);
+}
+.prompt {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-strong);
+  white-space: pre-wrap;
+}
+a {
+  color: var(--color-primary);
+}

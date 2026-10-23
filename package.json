@@ -1,0 +1,34 @@
+{
+  "name": "witlab",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace @witlab/api",
+    "dev:web": "npm run dev --workspace @witlab/web",
+    "build": "npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/api && npm run build --workspace @witlab/web",
+    "test": "npm run build --workspace @witlab/contracts && npm run test --workspace @witlab/api",
+    "typecheck": "npm run build --workspace @witlab/contracts && npm run typecheck --workspace @witlab/api && npm run typecheck --workspace @witlab/web",
+    "migrate": "npm run migrate --workspace @witlab/api",
+    "check:db": "npm run check:db --workspace @witlab/api",
+    "test:unit": "npm run build --workspace @witlab/contracts && npm run test:unit --workspace @witlab/api",
+    "e2e": "node tests/e2e/study-walkthrough.mjs",
+    "e2e:sources": "node tests/e2e/sources-walkthrough.mjs",
+    "e2e:review": "node tests/e2e/review-walkthrough.mjs",
+    "e2e:learner": "node tests/e2e/learner-walkthrough.mjs",
+    "e2e:written": "node tests/e2e/written-walkthrough.mjs",
+    "e2e:library": "node tests/e2e/library-walkthrough.mjs",
+    "e2e:auth": "node tests/e2e/auth-walkthrough.mjs",
+    "e2e:editing": "node tests/e2e/editing-walkthrough.mjs",
+    "e2e:makedeck": "node tests/e2e/makedeck-walkthrough.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.1"
+  }
+}

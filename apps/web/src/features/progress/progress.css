@@ -1,0 +1,28 @@
+.mode-picker { border: none; padding: 0; margin: 0; display: grid; gap: var(--space-2); }
+.mode-picker legend { font-weight: var(--font-weight-strong); margin-bottom: var(--space-2); }
+.mode-picker__off { opacity: 0.6; cursor: not-allowed; }
+
+.state-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.state-tile { border: 1px solid var(--color-border); border-radius: var(--radius-control); padding: var(--space-3) var(--space-4); background: var(--color-surface); }
+.state-tile__n { font-size: var(--font-size-xl); font-weight: var(--font-weight-strong); line-height: 1.1; }
+.state-tile__name { font-weight: var(--font-weight-strong); }
+.state-tile__def { font-size: var(--font-size-sm); color: var(--color-text-muted); margin: var(--space-1) 0 0; }
+
+.state-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--color-border); }
+.state-bar > span { display: block; height: 100%; }
+.state-bar .never { background: var(--color-border); }
+.state-bar .struggling { background: var(--color-error); }
+.state-bar .learning { background: #c9a227; }
+.state-bar .established { background: var(--color-success); }
+
+.activity { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; align-items: end; height: 96px; margin: 0; padding: 0; list-style: none; }
+.activity li { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.activity__bar { background: var(--color-primary); border-radius: 3px 3px 0 0; min-height: 2px; }
+.activity__bar--none { background: var(--color-border); }
+.activity__labels { display: flex; justify-content: space-between; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: var(--space-4); }
+.steps { margin: 0; padding-left: var(--space-6); display: grid; gap: var(--space-3); }
+.table-scroll { overflow-x: auto; }
+.table-scroll table { border-collapse: collapse; width: 100%; }
+.table-scroll th, .table-scroll td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); }

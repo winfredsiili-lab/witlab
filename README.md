@@ -15,9 +15,11 @@ Open http://localhost:5173, then:
 
 ### Making cards from a source
 
-1. **Library > Add a source**: paste text, or upload a PDF (up to 15 MB and 300 pages, with selectable text; scanned PDFs are rejected with an explanation because OCR is not supported).
+1. **Library > Make a deck from a source** (or Home > Make a deck): paste text, or upload a PDF (up to 15 MB and 300 pages, with selectable text; scanned PDFs are rejected with an explanation because OCR is not supported).
 2. On the source page choose what to read (whole source, a section, or a page/character range; at most 12,000 characters per request) and press **Generate cards**. This needs an AI key (see below); without one the button reports that generation is not set up.
-3. Generated cards are **drafts**, each with the passage it came from. Open **Review** to check them against the quote, edit, and approve or reject one or many. Choose a deck there to add approved cards to it in the same step, then study the deck.
+3. Generated cards are **drafts**, each with the passage it came from. Open **Library > To review** to check them against the quote, edit, and approve or reject one or many. By default approved cards go into a deck named after their source (created if needed), so they can always be studied. On the **Make a deck** page you can tick **Skip review** to put the AI cards straight into the deck: they stay marked as AI-made, and the default is to review.
+4. **Library > Read through** lets you read approved cards (search, filter by deck, reveal answers, card by card) without being tested; nothing is recorded.
+5. Any card can be edited from the Library (all types). Changing the question, answer, choices or criteria makes a new version; your history and schedule are kept.
 
 ### AI setup (optional)
 
@@ -73,7 +75,7 @@ npm run dev:api
 npm run dev:web
 ```
 
-The API prints a warning that it is in `dev-stub` auth mode: every request acts as one seeded development user. That is intentional and development-only; real sign-in comes later.
+**Sign-in:** open the app and choose *Create an account* (email + password, at least 10 characters). If you used an earlier version, register with the same email as the old development account (`DEV_USER_EMAIL`, default `dev@witlab.local`) to keep its data. For quick local work without sign-in set `AUTH_MODE=dev-stub` in `.env` (development only; refused in production). Browser test scripts need `AUTH_MODE=dev-stub`, except `e2e:auth`.
 
 Try the API with the PowerShell examples at the bottom of `docs/API_CONTRACTS.md`, or check health:
 
@@ -126,6 +128,9 @@ npm run e2e:sources   # paste, PDF, scope, generation, failures
 npm run e2e:review    # review queue, edit, approve into a deck, study
 npm run e2e:learner   # dashboard, settings, mode picker, resume, progress evidence, phone layout (no AI needed)
 npm run e2e:written   # AI-judged written answers: failure keeps your text and records nothing, clarification, partial/correct, usage (stub AI)
+npm run e2e:auth      # real sign-in, sign-out, password change, account deletion (AUTH_MODE=password)
+npm run e2e:editing   # edit approved cards of every type (AUTH_MODE=dev-stub)
+npm run e2e:makedeck  # one-step Make a deck, automatic deck, read-through (needs the AI stub env)
 npm run e2e:library   # approved cards in no deck: find, read, add to a deck, study (no AI needed)
 ```
 
@@ -143,5 +148,3 @@ Integration tests use `TEST_DATABASE_URL`, migrate it automatically, and refuse 
 - `apps/web` React + Vite frontend
 - `packages/contracts` request/response schemas shared by both (Zod)
 - `docs` specification and plans
-#   w i t l a b  
- 

@@ -1,0 +1,17 @@
+.wl-auth-page,
+.wl-auth-wait {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+}
+.wl-auth-card {
+  width: min(26rem, 100%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-8) var(--space-6);
+  display: grid;
+  gap: var(--space-4);
+}
