@@ -1,9 +1,13 @@
+import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type pg from "pg";
 
-export const migrationsDir = fileURLToPath(new URL("./migrations/", import.meta.url));
+const here = path.dirname(fileURLToPath(import.meta.url));
+export const migrationsDir = existsSync(path.join(here, "migrations"))
+  ? path.join(here, "migrations")
+  : path.join(here, "..", "..", "src", "db", "migrations");
 
 // Arbitrary constant; stops two processes migrating the same database at once.
 const MIGRATION_LOCK_ID = 727274;
