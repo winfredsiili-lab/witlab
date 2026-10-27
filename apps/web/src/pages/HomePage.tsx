@@ -75,8 +75,8 @@ export function HomePage() {
             </Card>
           )}
 
-          <Card>
-            <h2>Review</h2>
+          <Card className="wl-card--spotlight">
+            <h2>Due for review</h2>
             {due > 0 ? (
               <>
                 <p data-testid="due-count">{due} card{due === 1 ? "" : "s"} due for review.</p>
@@ -99,19 +99,30 @@ export function HomePage() {
             </Card>
           )}
 
-          <Card>
+          <Card className="wl-card--spotlight">
             <h2>Decks</h2>
             {(decks.data?.items.length ?? 0) === 0 ? (
               <p className="wl-muted">No decks yet. <Link to="/library">Create one</Link>{draftCount > 0 ? " or approve drafts into a new deck." : "."}</p>
             ) : (
-              <ul className="list">
-                {decks.data!.items.slice(0, 5).map((d) => (
-                  <li key={d.id} className="list-item">
-                    <Link to={`/decks/${d.id}`}>{d.title}</Link>
-                    <span className="wl-muted">{d.cardCount} card{d.cardCount === 1 ? "" : "s"}</span>
-                  </li>
-                ))}
-              </ul>
+              <>
+                {decks.data!.items[0] && (
+                  <div className="wl-deck-spotlight">
+                    <div className="stack-sm" style={{ flex: 1 }}>
+                      <Link to={`/decks/${decks.data!.items[0].id}`} className="wl-deck-spotlight__title">{decks.data!.items[0].title}</Link>
+                      <span className="wl-muted">{decks.data!.items[0].cardCount} card{decks.data!.items[0].cardCount === 1 ? "" : "s"}</span>
+                    </div>
+                    <Link to={`/decks/${decks.data!.items[0].id}`}><Button variant="secondary">Study</Button></Link>
+                  </div>
+                )}
+                <ul className="list">
+                  {decks.data!.items.slice(1, 5).map((d) => (
+                    <li key={d.id} className="list-item">
+                      <Link to={`/decks/${d.id}`}>{d.title}</Link>
+                      <span className="wl-muted">{d.cardCount} card{d.cardCount === 1 ? "" : "s"}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
           </Card>
 

@@ -4,6 +4,7 @@ dist/
 .env.*
 !.env.example
 *.log
+*.err
 .vite/
 coverage/
 .DS_Store

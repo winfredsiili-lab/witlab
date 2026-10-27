@@ -1,5 +1,4 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import { AuthProvider } from "../features/auth/AuthContext";
 import { LoginPage, RegisterPage, RequireAuth } from "../features/auth/AuthPages";
 import { AppLayout } from "../components/layout/AppLayout";
 import { BrowsePage } from "../pages/BrowsePage";
@@ -14,13 +13,10 @@ import { SettingsPage } from "../pages/SettingsPage";
 import { StudyPage } from "../pages/StudyPage";
 import { EmptyState } from "../components/feedback/Feedback";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
   {
-    element: (
-      <AuthProvider>
-        <Outlet />
-      </AuthProvider>
-    ),
+    element: <Outlet />,
     children: [
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
@@ -46,4 +42,10 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+  ],
+  {
+    future: {
+      v7_relativeSplatPath: true,
+    },
+  },
+);

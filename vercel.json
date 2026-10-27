@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm install && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/web",
+  "outputDirectory": "apps/web/dist",
+  "framework": null,
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://witlab-api.onrender.com/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

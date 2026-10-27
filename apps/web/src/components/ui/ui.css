@@ -1,26 +1,35 @@
 .wl-button {
   font: inherit;
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-strong);
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-control);
-  border: 1px solid transparent;
+  font-size: var(--font-size-md);
+  padding: 15px 28px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid transparent;
   cursor: pointer;
+  background: var(--color-surface);
+  color: var(--color-text);
 }
 .wl-button:disabled {
-  opacity: 0.6;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 .wl-button--primary {
-  background: var(--color-primary);
+  background: var(--color-ink);
   color: var(--color-on-primary);
+  border-color: var(--color-ink);
 }
 .wl-button--primary:hover:not(:disabled) {
   background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
 }
 .wl-button--secondary {
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-text);
-  border-color: var(--color-border);
+  border-color: var(--color-hairline);
+}
+.wl-button--secondary:hover:not(:disabled) {
+  background: var(--color-hover-overlay);
 }
 .wl-button--danger {
   background: var(--color-surface);
@@ -30,10 +39,10 @@
 
 .wl-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-hairline);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-6);
+  box-shadow: none;
+  padding: 26px 30px;
   display: grid;
   gap: var(--space-4);
 }
@@ -42,20 +51,21 @@
   display: inline-block;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-strong);
-  padding: var(--space-1) var(--space-3);
-  border-radius: 999px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
 }
 .wl-pill--success {
-  color: var(--color-success);
-  background: var(--color-success-bg);
+  color: var(--color-ink);
+  background: var(--color-mint);
 }
 .wl-pill--error {
-  color: var(--color-error);
-  background: var(--color-error-bg);
+  color: var(--color-ink);
+  background: var(--color-peach);
+  border: 1.5px solid var(--color-coral);
 }
 .wl-pill--neutral {
-  color: var(--color-text-muted);
-  background: var(--color-border);
+  color: var(--color-ink);
+  background: var(--color-yellow);
 }
 
 .wl-field {
@@ -65,16 +75,18 @@
 .wl-field label {
   font-weight: var(--font-weight-strong);
   font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
 }
 .wl-hint {
-  color: var(--color-text-muted);
+  color: var(--color-muted);
   font-size: var(--font-size-sm);
 }
-.wl-input {
+.wl-input,
+.wl-textarea {
   font: inherit;
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-control);
+  padding: 12px 18px;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-input);
   background: var(--color-surface);
   color: var(--color-text);
   width: 100%;
@@ -85,28 +97,30 @@
 }
 
 .wl-error {
-  color: var(--color-error);
-  background: var(--color-error-bg);
-  border-radius: var(--radius-control);
+  color: var(--color-ink);
+  background: var(--color-peach);
+  border: 1.5px solid var(--color-coral);
+  border-radius: var(--radius-input);
   padding: var(--space-2) var(--space-3);
 }
 .wl-muted {
-  color: var(--color-text-muted);
+  color: var(--color-muted);
 }
 .wl-empty {
-  border: 1px dashed var(--color-border);
+  border: 2px dashed var(--color-ink);
   border-radius: var(--radius-card);
   padding: var(--space-6);
   text-align: center;
   display: grid;
   gap: var(--space-2);
+  background: var(--color-surface);
 }
 
 .wl-notice {
   margin: 0;
   padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-control);
-  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  border: 1px solid var(--color-hairline);
   background: var(--color-background);
   color: var(--color-text);
   font-size: var(--font-size-sm);
@@ -115,4 +129,22 @@
 a.wl-button {
   display: inline-block;
   text-decoration: none;
+}
+.wl-card--spotlight {
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+}
+.wl-deck-spotlight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-card-sm);
+  background: var(--color-yellow);
+}
+.wl-deck-spotlight__title {
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-lg);
+  text-decoration: none;
+  color: var(--color-ink);
 }

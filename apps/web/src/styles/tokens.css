@@ -1,70 +1,90 @@
 /*
  * Design tokens: the single source of truth for visual values.
- * Light by default; follows the system dark-mode setting.
+ * Light theme only.
  * Components must use these variables, never hardcoded colours or spacing.
  */
 :root {
+  color-scheme: light;
+
   /* Colour */
-  --color-primary: #1f5c52;
-  --color-primary-hover: #17463f;
-  --color-on-primary: #ffffff;
-  --color-background: #f5f4ef;
-  --color-surface: #ffffff;
-  --color-text: #202522;
-  --color-text-muted: #5b625d;
-  --color-border: #dfe3df;
-  --color-success: #1f7a4d;
-  --color-success-bg: #e6f4ec;
-  --color-error: #b3261e;
-  --color-error-bg: #fbeae9;
+  --color-ink: #14110F;
+  --color-primary: var(--color-ink);
+  --color-ink-hover: #2E2924;
+  --color-primary-hover: var(--color-ink-hover);
+  --color-on-ink: #FFFFFF;
+  --color-on-primary: var(--color-on-ink);
+  --color-page: #FBF7EE;
+  --color-background: var(--color-page);
+  --color-paper: #FFFFFF;
+  --color-surface: var(--color-paper);
+  --color-text: var(--color-ink);
+  --color-muted: #5B544B;
+  --color-text-muted: var(--color-muted);
+  --color-hairline: #E7DFCF;
+  --color-border: var(--color-hairline);
+  --color-success: #2F7D5A;
+  --color-success-bg: #86E7C0;
+  --color-error: #F4745A;
+  --color-error-bg: #F9B89A;
+  --color-hover-overlay: rgba(20, 17, 15, 0.06);
+
+  /* Accents (color psychology) */
+  --color-yellow: #F7D95C;
+  --color-lilac: #B794F4;
+  --color-pink: #F3A6C6;
+  --color-mint: #86E7C0;
+  --color-peach: #F9B89A;
+  --color-blue: #93C5FD;
+  --color-coral: #F4745A;
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: ui-serif, Georgia, "Iowan Old Style", "Palatino Linotype", serif;
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 1.75rem;
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+  --font-size-sm: 0.8125rem;
+  --font-size-md: 0.9375rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 1.75rem;
+  --font-size-3xl: 2.25rem;
   --font-weight-regular: 400;
+  --font-weight-medium: 500;
   --font-weight-strong: 600;
+  --font-weight-bold: 700;
+  --font-weight-display: 800;
   --line-height: 1.5;
+  --line-height-tight: 1.05;
 
   /* Spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
+  --space-5: 20px;
   --space-6: 24px;
+  --space-7: 28px;
   --space-8: 32px;
+  --space-9: 40px;
+  --space-10: 48px;
 
   /* Shape */
-  --radius-card: 12px;
-  --radius-control: 8px;
-  --shadow-card: 0 1px 2px rgba(32, 37, 34, 0.05), 0 4px 14px rgba(32, 37, 34, 0.04);
+  --radius-pill: 999px;
+  --radius-card: 32px;
+  --radius-card-sm: 24px;
+  --radius-hero: 36px;
+  --radius-study: 44px;
+  --radius-control: 999px;
+  --radius-input: 22px;
+  --radius-icon-tile: 16px;
+  --radius-avatar: 50%;
+
+  /* Shadows */
+  --shadow-card: none;
+  --shadow-lift: 0 30px 60px rgba(20, 17, 15, 0.14);
 
   /* Layout */
-  --sidebar-width: 220px;
-  --content-max-width: 960px;
+  --sidebar-width: 260px;
+  --content-max-width: 1160px;
 
   /* Focus */
-  --focus-ring: 0 0 0 3px rgba(36, 91, 82, 0.4);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #6bc4b0;
-    --color-primary-hover: #8fd6c5;
-    --color-on-primary: #0d1f1b;
-    --color-background: #131715;
-    --color-surface: #1b211f;
-    --color-text: #e8ece9;
-    --color-text-muted: #a2aba6;
-    --color-border: #2c3531;
-    --color-success: #7fd6a4;
-    --color-success-bg: #1d3328;
-    --color-error: #ff9d96;
-    --color-error-bg: #3a1f1d;
-    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --focus-ring: 0 0 0 3px rgba(107, 196, 176, 0.5);
-  }
+  --focus-ring: 3px solid var(--color-ink);
 }

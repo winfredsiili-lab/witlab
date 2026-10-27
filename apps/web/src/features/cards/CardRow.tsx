@@ -75,7 +75,7 @@ export function CardRow({ card, deckChoices, onChanged, onDelete }: CardRowProps
           <p className="wl-muted">
             {TYPE_NAMES[card.cardType]}
             {card.learningMode ? ` · ${MODE_NAMES[card.learningMode]} mode` : ""}
-            {card.origin === "ai_generated" ? " · made by AI" : " · made by you"}
+            {card.origin === "manual" ? " · made by you" : " · made by AI"}
           </p>
           <p>
             <strong>{card.cardType === "open_ended" ? "Model answer" : "Answer"}:</strong> {card.answer}

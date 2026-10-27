@@ -2,7 +2,7 @@ import { z } from "zod";
 import { idSchema, listQuerySchema, pageSchema, timestampSchema } from "./common.js";
 
 export const cardStatusSchema = z.enum(["draft", "approved", "rejected"]);
-export const cardOriginSchema = z.enum(["manual", "ai_generated"]);
+export const cardOriginSchema = z.enum(["manual", "ai_generated", "ai_reviewed", "ai_auto_added"]);
 /** The FORM of the task. Not the study mode, and not the review schedule. */
 export const cardTypeSchema = z.enum(["term_definition", "short_answer", "multiple_choice", "numeric", "open_ended"]);
 

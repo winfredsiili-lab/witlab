@@ -1,0 +1,42 @@
+# Render Blueprint for the WitLab API + PostgreSQL database.
+# Create the service from this file in the Render dashboard, or run:
+#   render blueprint launch
+services:
+  - type: web
+    name: witlab-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: npm install && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/api
+    preDeployCommand: npm run migrate --workspace @witlab/api
+    startCommand: npm run start --workspace @witlab/api
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AUTH_MODE
+        value: password
+      - key: ALLOW_REGISTRATION
+        value: "true"
+      - key: PORT
+        value: "10000"
+      - key: CORS_ORIGIN
+        # Replace with your Vercel URL, e.g. https://witlab.vercel.app
+        value: https://witlab.vercel.app
+      - key: DATABASE_URL
+        fromDatabase:
+          name: witlab-db
+          property: connectionString
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: AI_MODEL
+        value: openai/gpt-oss-120b
+
+databases:
+  - name: witlab-db
+    plan: free
+    databaseName: witlab
+    user: witlab
