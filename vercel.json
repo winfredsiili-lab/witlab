@@ -5,6 +5,7 @@
       "root": "apps/api",
       "framework": "express",
       "entrypoint": "dist/server.js",
+      "outputDirectory": "dist",
       "installCommand": "cd ../.. && npm install",
       "buildCommand": "cd ../.. && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/api"
     },
