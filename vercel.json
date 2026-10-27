@@ -1,33 +1,8 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "services": {
-    "api": {
-      "root": "apps/api",
-      "framework": "express",
-      "outputDirectory": "dist",
-      "installCommand": "cd ../.. && npm install",
-      "buildCommand": "cd ../.. && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/api"
-    },
-    "web": {
-      "root": "apps/web",
-      "framework": "vite",
-      "installCommand": "cd ../.. && npm install",
-      "buildCommand": "cd ../.. && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/web",
-      "outputDirectory": "dist"
-    }
-  },
+  "installCommand": "npm install",
+  "buildCommand": "npm run build --workspace @witlab/web",
+  "outputDirectory": "apps/web/dist",
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": {
-        "service": "api"
-      }
-    },
-    {
-      "source": "/(.*)",
-      "destination": {
-        "service": "web"
-      }
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

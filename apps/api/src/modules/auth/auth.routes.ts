@@ -66,8 +66,8 @@ export function createAuthRouter(
   const auth = requireUser(deps.authenticate);
 
   const setCookie = (res: Response, token: string, expiresAt: Date) =>
-    res.cookie(SESSION_COOKIE, token, { httpOnly: true, sameSite: "lax", secure: deps.secureCookies, path: "/", expires: expiresAt });
-  const clearCookie = (res: Response) => res.clearCookie(SESSION_COOKIE, { httpOnly: true, sameSite: "lax", secure: deps.secureCookies, path: "/" });
+    res.cookie(SESSION_COOKIE, token, { httpOnly: true, sameSite: deps.secureCookies ? "none" : "lax", secure: deps.secureCookies, path: "/", expires: expiresAt });
+  const clearCookie = (res: Response) => res.clearCookie(SESSION_COOKIE, { httpOnly: true, sameSite: deps.secureCookies ? "none" : "lax", secure: deps.secureCookies, path: "/" });
   const agent = (req: Request) => req.header("user-agent") ?? null;
 
   router.post(

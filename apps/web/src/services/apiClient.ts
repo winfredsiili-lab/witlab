@@ -38,9 +38,11 @@ interface RequestOptions {
  */
 export async function request<T>(method: Method, path: string, schema: ZodType<T> | null, options: RequestOptions = {}): Promise<T> {
   let res: Response;
+  const apiBaseUrl = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
   try {
-    res = await fetch(path, {
+    res = await fetch(`${apiBaseUrl}${path}`, {
       method,
+      credentials: "include",
       headers: {
         Accept: "application/json",
         ...(options.raw
