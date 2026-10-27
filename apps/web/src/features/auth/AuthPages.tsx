@@ -15,7 +15,7 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
   if (state.status === "loading") return <div className="wl-auth-wait"><Loading label="Loading WitLab…" /></div>;
   if (state.status === "unreachable") {
     return (
-      <div className="wl-auth-page">
+      <div className="wl-auth-page wl-auth-page--single">
         <div className="wl-auth-card">
           <h1>Can't reach WitLab</h1>
           <ErrorMessage>{state.message}</ErrorMessage>
@@ -33,6 +33,25 @@ function useDestination(): string {
   const from = (location.state as { from?: string } | null)?.from;
   // Only ever return to a path inside this app.
   return from && from.startsWith("/") && !from.startsWith("//") && !from.startsWith("/login") && !from.startsWith("/register") ? from : "/";
+}
+
+function AuthHero() {
+  return (
+    <aside className="wl-auth-hero" aria-label="About WitLab">
+      <div className="wl-auth-hero__brand">WitLab</div>
+      <h2 className="wl-auth-hero__title">Turn what you read into what you remember.</h2>
+      <p className="wl-auth-hero__lede">
+        Import notes and PDFs, generate flashcards with AI, review with spaced
+        repetition, and track your progress in one calm study workspace.
+      </p>
+      <ul className="wl-auth-hero__features">
+        <li>Import text and PDF sources</li>
+        <li>Generate cards with AI or write your own</li>
+        <li>Study with spaced repetition and instant feedback</li>
+        <li>Track decks, drafts, and learning progress</li>
+      </ul>
+    </aside>
+  );
 }
 
 export function LoginPage() {
@@ -64,6 +83,7 @@ export function LoginPage() {
 
   return (
     <div className="wl-auth-page">
+      <AuthHero />
       <form className="wl-auth-card" onSubmit={(e) => void submit(e)}>
         <div className="wl-brand">WitLab</div>
         <h1>Sign in</h1>
@@ -111,6 +131,7 @@ export function RegisterPage() {
 
   return (
     <div className="wl-auth-page">
+      <AuthHero />
       <form className="wl-auth-card" onSubmit={(e) => void submit(e)}>
         <div className="wl-brand">WitLab</div>
         <h1>Create your account</h1>
