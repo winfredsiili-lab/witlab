@@ -1,4 +1,5 @@
 {
+  "framework": "vite",
   "installCommand": "npm install",
   "buildCommand": "npm run build --workspace @witlab/web",
   "outputDirectory": "apps/web/dist",
