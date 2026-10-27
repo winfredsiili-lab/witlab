@@ -18,7 +18,7 @@ try {
   if (code === "42P01") {
     console.error("The database schema is missing. Run: npm run migrate");
   } else {
-    console.error("Could not prepare the development user:", err instanceof Error ? err.message : err);
+    console.error("Could not prepare the development user:", err);
   }
   await pool.end();
   process.exit(1);
