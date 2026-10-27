@@ -38,7 +38,10 @@ function useDestination(): string {
 function AuthHero() {
   return (
     <aside className="wl-auth-hero" aria-label="About WitLab">
-      <div className="wl-auth-hero__brand">WitLab</div>
+      <div className="wl-auth-hero__brand">
+        <span className="wl-brand__tile" aria-hidden="true">W</span>
+        <span>WitLab</span>
+      </div>
       <h2 className="wl-auth-hero__title">Turn what you read into what you remember.</h2>
       <p className="wl-auth-hero__lede">
         Import notes and PDFs, generate flashcards with AI, review with spaced
@@ -85,7 +88,10 @@ export function LoginPage() {
     <div className="wl-auth-page">
       <AuthHero />
       <form className="wl-auth-card" onSubmit={(e) => void submit(e)}>
-        <div className="wl-brand">WitLab</div>
+        <div className="wl-brand">
+          <span className="wl-brand__tile" aria-hidden="true">W</span>
+          <span>WitLab</span>
+        </div>
         <h1>Sign in</h1>
         <TextInput label="Email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
         <TextInput label="Password" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -133,7 +139,10 @@ export function RegisterPage() {
     <div className="wl-auth-page">
       <AuthHero />
       <form className="wl-auth-card" onSubmit={(e) => void submit(e)}>
-        <div className="wl-brand">WitLab</div>
+        <div className="wl-brand">
+          <span className="wl-brand__tile" aria-hidden="true">W</span>
+          <span>WitLab</span>
+        </div>
         <h1>Create your account</h1>
         <TextInput label="Name (optional)" autoComplete="name" maxLength={60} value={name} onChange={(e) => setName(e.target.value)} />
         <TextInput label="Email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />

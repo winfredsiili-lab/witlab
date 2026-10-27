@@ -90,3 +90,32 @@
     order: 1;
   }
 }
+
+.wl-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--font-weight-display) var(--font-size-xl) var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.wl-brand__tile {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: var(--color-yellow);
+  display: grid;
+  place-items: center;
+  font: 800 22px var(--font-display);
+  color: var(--color-ink);
+  flex-shrink: 0;
+}
+
+.wl-auth-hero__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--font-weight-display) var(--font-size-lg) var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+}
