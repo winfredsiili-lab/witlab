@@ -5,13 +5,15 @@ import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { StateBar } from "../features/progress/StateSummary";
 import "../features/progress/progress.css";
+import "./home.css";
 import { useAsync } from "../hooks/useAsync";
 import { api } from "../services/api";
 import { messageOf } from "../services/apiClient";
 
 function StartHere() {
   return (
-    <Card>
+    <Card className="home-start">
+      <div className="home-card__kicker">First time here</div>
       <h2>Start here</h2>
       <ol className="steps">
         <li><strong><Link to="/sources/new">Make a deck</Link></strong>: paste text or upload a PDF with selectable text.</li>
@@ -21,6 +23,15 @@ function StartHere() {
       </ol>
       <p className="wl-muted">Prefer to write your own cards? Create a deck in the <Link to="/library">Library</Link> and add cards by hand.</p>
     </Card>
+  );
+}
+
+function Stat({ label, value, tone }: { label: string; value: number; tone: string }) {
+  return (
+    <div className={`home-stat home-stat--${tone}`}>
+      <span className="home-stat__value">{value}</span>
+      <span className="home-stat__label">{label}</span>
+    </div>
   );
 }
 
@@ -42,6 +53,8 @@ export function HomePage() {
   const draftCount = drafts.data?.total ?? 0;
   const resume = active.data?.items[0];
   const name = me.data?.displayName;
+  const deckCount = decks.data?.total ?? 0;
+  const sourceCount = sources.data?.total ?? 0;
 
   async function startReview() {
     setError(null);
@@ -53,12 +66,41 @@ export function HomePage() {
   }
 
   return (
-    <div className="stack">
-      <header>
-        <h1>{name ? `Welcome back, ${name}` : "WitLab"}</h1>
-        <p className="wl-muted">Turn what you are learning into cards you can recall, and review them on a schedule.</p>
-      </header>
+    <div className="stack home">
+      <section className="home-hero">
+        <span className="home-eyebrow">WitLab ∑ study dashboard</span>
+        <h1 className="home-title">{name ? `Welcome back, ${name}` : "WitLab"}</h1>
+        <p className="home-lede">
+          Turn what you are learning into cards you can recall, and review them on a schedule.
+        </p>
+        <div className="home-actions">
+          {!isNew && due > 0 && (
+            <Button onClick={() => void startReview()}>Start review ∑ {due}</Button>
+          )}
+          <Link className="wl-button wl-button--secondary" to="/sources/new">
+            Make a deck
+          </Link>
+          {!isNew && draftCount > 0 && (
+            <Link className="wl-button wl-button--secondary" to="/review">
+              Review drafts ∑ {draftCount}
+            </Link>
+          )}
+          {!isNew && resume && (
+            <Link className="wl-button wl-button--secondary" to={`/study/${resume.id}`}>
+              Resume session
+            </Link>
+          )}
+        </div>
 
+        {!isNew && ready && (
+          <div className="home-stats">
+            <Stat label="Due now" value={due} tone="due" />
+            <Stat label="Drafts" value={draftCount} tone="drafts" />
+            <Stat label="Decks" value={deckCount} tone="decks" />
+            <Stat label="Sources" value={sourceCount} tone="sources" />
+          </div>
+        )}
+      </section>
       {!ready && <Loading />}
       {loadError && <ErrorMessage>{loadError}</ErrorMessage>}
       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -66,20 +108,33 @@ export function HomePage() {
       {ready && isNew && <StartHere />}
 
       {ready && !isNew && (
-        <div className="dashboard-grid">
+        <div className="home-grid">
           {resume && (
-            <Card data-testid="resume-card">
-              <h2>Continue</h2>
-              <p>You have a session in progress{resume.deckTitle ? ` in ‚Äú${resume.deckTitle}‚Äù` : ""}: {resume.answered} of {resume.total} answered.</p>
-              <Link to={`/study/${resume.id}`}>Resume session</Link>
+            <Card data-testid="resume-card" className="home-card home-card--accent">
+              <span className="home-card__kicker">Continue</span>
+              <h2>Session in progress</h2>
+              <p>
+                You have a session in progress{resume.deckTitle ? ` in ì${resume.deckTitle}î` : ""}: {" "}
+                {resume.answered} of {resume.total} answered.
+              </p>
+              <div><Link to={`/study/${resume.id}`}>Resume session</Link></div>
             </Card>
           )}
 
-          <Card className="wl-card--spotlight">
-            <h2>Due for review</h2>
+          <Card className="home-card home-card--accent">
+            <span className="home-card__kicker">Due for review</span>
+            <div className="home-due-row">
+              {due > 0 ? (
+                <>
+                  <span className="home-card__big" data-testid="due-count">{due}</span>
+                  <span className="wl-muted">card{due === 1 ? "" : "s"} due</span>
+                </>
+              ) : (
+                <span className="home-card__big">0</span>
+              )}
+            </div>
             {due > 0 ? (
               <>
-                <p data-testid="due-count">{due} card{due === 1 ? "" : "s"} due for review.</p>
                 <p className="wl-muted">This starts a Recall review. To practise Explain, Connections or Apply, open a deck and choose the mode.</p>
                 <div><Button onClick={() => void startReview()}>Start review</Button></div>
               </>
@@ -92,23 +147,25 @@ export function HomePage() {
           </Card>
 
           {draftCount > 0 && (
-            <Card data-testid="drafts-card">
-              <h2>Drafts waiting</h2>
+            <Card data-testid="drafts-card" className="home-card">
+              <span className="home-card__kicker">Drafts</span>
+              <h2>Waiting for review</h2>
               <p>{draftCount} generated card{draftCount === 1 ? "" : "s"} waiting for your review.</p>
               <Link to="/review">Review drafts</Link>
             </Card>
           )}
 
-          <Card className="wl-card--spotlight">
-            <h2>Decks</h2>
+          <Card className="home-card">
+            <span className="home-card__kicker">Decks</span>
+            <h2>Your decks</h2>
             {(decks.data?.items.length ?? 0) === 0 ? (
               <p className="wl-muted">No decks yet. <Link to="/library">Create one</Link>{draftCount > 0 ? " or approve drafts into a new deck." : "."}</p>
             ) : (
               <>
                 {decks.data!.items[0] && (
-                  <div className="wl-deck-spotlight">
+                  <div className="home-deck-spotlight">
                     <div className="stack-sm" style={{ flex: 1 }}>
-                      <Link to={`/decks/${decks.data!.items[0].id}`} className="wl-deck-spotlight__title">{decks.data!.items[0].title}</Link>
+                      <Link to={`/decks/${decks.data!.items[0].id}`} className="home-deck-spotlight__title">{decks.data!.items[0].title}</Link>
                       <span className="wl-muted">{decks.data!.items[0].cardCount} card{decks.data!.items[0].cardCount === 1 ? "" : "s"}</span>
                     </div>
                     <Link to={`/decks/${decks.data!.items[0].id}`}><Button variant="secondary">Study</Button></Link>
@@ -127,17 +184,19 @@ export function HomePage() {
           </Card>
 
           {progress.data && progress.data.totalCards > 0 && (
-            <Card>
+            <Card className="home-card">
+              <span className="home-card__kicker">Progress</span>
               <h2>Progress</h2>
               <StateBar states={progress.data.states} total={progress.data.totalCards} />
               <p className="wl-muted">
-                {progress.data.states.established} holding up ¬∑ {progress.data.states.learning} learning ¬∑ {progress.data.states.struggling} need work ¬∑ {progress.data.states.never} not practised.
+                {progress.data.states.established} holding up ∑ {progress.data.states.learning} learning ∑ {progress.data.states.struggling} need work ∑ {progress.data.states.never} not practised.
               </p>
               <Link to="/progress">See the evidence</Link>
             </Card>
           )}
 
-          <Card>
+          <Card className="home-card">
+            <span className="home-card__kicker">Sources</span>
             <h2>Sources</h2>
             <p className="wl-muted">{sources.data?.total ?? 0} source{(sources.data?.total ?? 0) === 1 ? "" : "s"}.</p>
             <Link to="/sources/new">Make a deck</Link>
