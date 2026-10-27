@@ -1,4 +1,5 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
+import { AuthProvider } from "../features/auth/AuthContext";
 import { LoginPage, RegisterPage, RequireAuth } from "../features/auth/AuthPages";
 import { AppLayout } from "../components/layout/AppLayout";
 import { BrowsePage } from "../pages/BrowsePage";
@@ -16,7 +17,11 @@ import { EmptyState } from "../components/feedback/Feedback";
 export const router = createBrowserRouter(
   [
   {
-    element: <Outlet />,
+    element: (
+      <AuthProvider>
+        <Outlet />
+      </AuthProvider>
+    ),
     children: [
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },

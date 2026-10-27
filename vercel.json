@@ -1,9 +1,33 @@
 {
-  "buildCommand": "npm install && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/web",
-  "outputDirectory": "apps/web/dist",
-  "framework": null,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "api": {
+      "root": "apps/api",
+      "framework": "express",
+      "entrypoint": "dist/server.js",
+      "installCommand": "cd ../.. && npm install",
+      "buildCommand": "cd ../.. && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/api"
+    },
+    "web": {
+      "root": "apps/web",
+      "framework": "vite",
+      "installCommand": "cd ../.. && npm install",
+      "buildCommand": "cd ../.. && npm run build --workspace @witlab/contracts && npm run build --workspace @witlab/web",
+      "outputDirectory": "dist"
+    }
+  },
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://witlab-api.onrender.com/api/:path*" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "api"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "web"
+      }
+    }
   ]
 }
