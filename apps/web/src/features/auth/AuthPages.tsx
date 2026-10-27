@@ -42,16 +42,17 @@ function AuthHero() {
         <span className="wl-brand__tile" aria-hidden="true">W</span>
         <span>WitLab</span>
       </div>
-      <h2 className="wl-auth-hero__title">Turn what you read into what you remember.</h2>
+      <h2 className="wl-auth-hero__title">Flashcards built from your own material.</h2>
       <p className="wl-auth-hero__lede">
-        Import notes and PDFs, generate flashcards with AI, review with spaced
-        repetition, and track your progress in one calm study workspace.
+        Turn what you read into what you know. Drop in a PDF or paste your notes.
+        WitLab drafts cards from the pages you choose, you approve every one, and
+        practice brings each idea back right when you need it.
       </p>
       <ul className="wl-auth-hero__features">
         <li>Import text and PDF sources</li>
-        <li>Generate cards with AI or write your own</li>
-        <li>Study with spaced repetition and instant feedback</li>
-        <li>Track decks, drafts, and learning progress</li>
+        <li>Choose chapters or page ranges</li>
+        <li>Approve every card before studying</li>
+        <li>Practice with spaced repetition</li>
       </ul>
     </aside>
   );
