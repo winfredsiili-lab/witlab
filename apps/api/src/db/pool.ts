@@ -2,10 +2,19 @@ import pg from "pg";
 import type { DependencyStatus } from "@witlab/contracts";
 
 export function createPool(databaseUrl: string): pg.Pool {
+  const url = new URL(databaseUrl);
+  const sslMode = url.searchParams.get("sslmode");
+  const needsSsl =
+    sslMode === "require" ||
+    sslMode === "verify-ca" ||
+    sslMode === "verify-full" ||
+    url.hostname.endsWith("render.com") ||
+    url.hostname.includes("render.com");
   return new pg.Pool({
     connectionString: databaseUrl,
     max: 10,
     connectionTimeoutMillis: 3000,
+    ssl: needsSsl ? { rejectUnauthorized: false } : undefined,
   });
 }
 
